@@ -1,7 +1,8 @@
 $('.save-button').on('click', newIdea);
-$('.idea-list').on('blur', 'h2', editTitle);
-$('.idea-list').on('blur', '.card-body', editBody);
+$('.idea-list').on('blur', '.card', editTitle);
+$('.idea-list').on('blur', '.card', editBody);
 $('.search-input').on('keyup', searchList);
+$('.idea-list').on('click', '.delete-button', deleteCard);
 
 retrieveCard();
 
@@ -21,11 +22,7 @@ function MakeCard(title, body) {
   this.body = body;
   this.quality = "swill";
   this.uniqueid = Date.now();
-  // var objectToStore = {uniqueid: this.uniqueid, title: $title.val(), body: $body.val(), quality: this.quality};
-  // var stringifiedObject = JSON.stringify(objectToStore);
-  // localStorage.setItem(this.uniqueid, stringifiedObject);
-
-};
+  };
 
 function appendCard(ideaCard) {
   $('.idea-list').prepend(
@@ -52,6 +49,30 @@ function pushToStorage(id, object){
   var stringifiedObject = JSON.stringify(object);
   localStorage.setItem(id, stringifiedObject);
 }
+
+function deleteCard() {
+  var id = this.closest('article').getAttribute('id');
+  localStorage.removeItem(id);
+  this.closest('article').remove();
+};
+
+function editTitle(card) {
+  var id = $(this).attr('id');
+  var pulledObject = localStorage.getItem(id);
+  var parsedObject = JSON.parse(pulledObject);
+  var userTitle = $(this).find('.card-title').text();
+  parsedObject.title = userTitle;
+  pushToStorage(id, parsedObject);
+};
+
+function editBody(card) {
+  var id = $(this).attr('id');
+  var pulledObject = localStorage.getItem(id);
+  var parsedObject = JSON.parse(pulledObject);
+  var userBody = $(this).find('.card-body').text();
+  parsedObject.body = userBody;
+  pushToStorage(id, parsedObject);
+};
 
 // $('.idea-list').on('click', '.up-vote', function() {
 //   if ($(this).closest('nav').children('p').text() === 'quality: swill')
@@ -87,30 +108,28 @@ function pushToStorage(id, object){
 //     pushToStorage(id, parsedObject);
 // }});
 
-$('.idea-list').on('click', '.delete-button', deleteCard);
-function deleteCard() {
-  var id = this.closest('article').getAttribute('id');
-  localStorage.removeItem(id);
-  this.closest('article').remove();
-};
 
-function editTitle(card) {
-  var id = this.closest('article').getAttribute('id');
-  var newTitle = $(this).closest('.card-title').text();
-  var retrievedObject = localStorage.getItem(id);
-  var parsedObject = JSON.parse(retrievedObject);
-  parsedObject.title = newTitle;
-  pushToStorage(id, parsedObject);
-};
 
-function editBody(card) {
-  var id = this.closest('article').getAttribute('id');
-  var newTitle = $(this).closest('.card-body').text();
-  var retrievedObject = localStorage.getItem(id);
-  var parsedObject = JSON.parse(retrievedObject);
-  parsedObject.body = newTitle;
-  pushToStorage(id, parsedObject);
-};
+// 1. select parent section and use the event blur which activates when tabbed out of element. opposite of focus
+// 2. set variable to grab attribute of card ID; console log this as a sanity check
+// 3. pull object from local storage to be edited and set to varible(first)
+// 4. destringify object from local storage
+// 5. set variable to grab what edit user types in. (eg title)
+// 6. set the title of object to the title user typed in
+// 7.set var to hold stringified object so as to put into localStorage
+// 8. set item in local storage using object's (id, stringed object variable)
+
+
+
+//
+// function editBody(card) {
+//   var id = this.closest('article').getAttribute('id');
+//   var newTitle = $(this).closest('.card-body').text();
+//   var retrievedObject = localStorage.getItem(id);
+//   var parsedObject = JSON.parse(retrievedObject);
+//   parsedObject.body = newTitle;
+//   pushToStorage(id, parsedObject);
+// };
 
 function searchList(e) {
   event.preventDefault();
