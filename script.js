@@ -13,51 +13,47 @@ retrieveCard();
 
 function newIdea(event) {
   event.preventDefault();
-  var newCard = new MakeCard($title.val(), $body.val(), (new Date()).getTime());
+  var newCard = new MakeCard($title.val(), $body.val());
   newCard.appendCard();
   $title.val('');
   $body.val('');
 };
 
-function MakeCard(title, body, uniqueid) {
+function MakeCard(title, body) {
   this.title = title;
   this.body = body;
   this.quality = "swill";
-  this.uniqueid = uniqueid;
-  var objectToStore = {uniqueid: this.uniqueid, title: $title.val(), body: $body.val(), quality: this.quality};
-  var stringifiedObject = JSON.stringify(objectToStore);
-  localStorage.setItem(this.uniqueid, stringifiedObject);
-}; 
+  this.uniqueid = Date.now();
+  // var objectToStore = {uniqueid: this.uniqueid, title: $title.val(), body: $body.val(), quality: this.quality};
+  // var stringifiedObject = JSON.stringify(objectToStore);
+  // localStorage.setItem(this.uniqueid, stringifiedObject);
+};
 
-MakeCard.prototype.appendCard = function(){
+ function appendCard(bananas){
+
   $ideaList.prepend(
-    `<article class="card" id="${this.uniqueid}">
-      <h2 class="card-title" contenteditable="true">${this.title}</h2>
+    `<article class="card" id="${bananas.uniqueid}">
+      <h2 class="card-title" contenteditable="true">${bananas.title}</h2>
       <button class="card-buttons delete-button"></button>
-      <p class="card-body" contenteditable="true">${this.body}</p>
+      <p class="card-body" contenteditable="true">${bananas.body}</p>
       <nav>
         <button class="card-buttons up-vote"></button>
         <button class="card-buttons down-vote"></button>
-        <p class="quality">quality: ${this.quality}</p>
+        <p class="quality">quality: ${bananas.quality}</p>
       </nav>
     </article>`)
+
 };
 
 function retrieveCard(){
   for(var i=0; i < localStorage.length; i++) {
   var retrievedObject = localStorage.getItem(localStorage.key(i));
   var parsedObject = JSON.parse(retrievedObject);
-  $ideaList.prepend(
-      `<article class="card" id="${parsedObject.uniqueid}">
-      <h2 class="card-title" contenteditable="true">${parsedObject.title}</h2>
-      <button class="card-buttons delete-button"></button>
-      <p class="card-body" contenteditable="true">${parsedObject.body}</p>
-      <nav>
-        <button class="card-buttons up-vote"></button>
-        <button class="card-buttons down-vote"></button>
-        <p class="quality">quality: ${parsedObject.quality}</p>
-      </nav>
-    </article>`)
+  //pull the old card and then call the appendcard function
+
+  var newCard = new MakeCard($title.val(), $body.val());
+  // newCard.appendCard();
+  appendCard(newCard);
 }};
 
 function pushToStorage(id, object){
@@ -66,7 +62,7 @@ function pushToStorage(id, object){
 }
 
 $('.idea-list').on('click', '.up-vote', function() {
-  if ($(this).closest('nav').children('p').text() === 'quality: swill') 
+  if ($(this).closest('nav').children('p').text() === 'quality: swill')
     {$(this).siblings('.quality').text('quality: plausible');
     var id = this.closest('article').getAttribute('id');
     var retrievedObject = localStorage.getItem(id);
@@ -83,7 +79,7 @@ $('.idea-list').on('click', '.up-vote', function() {
 }});
 
 $('.idea-list').on('click', '.down-vote', function (){
-  if ($(this).closest('nav').children('p').text() === 'quality: genius') 
+  if ($(this).closest('nav').children('p').text() === 'quality: genius')
     {$(this).siblings('.quality').text('quality: plausible');
     var id = this.closest('article').getAttribute('id');
     var retrievedObject = localStorage.getItem(id);
@@ -130,7 +126,7 @@ function searchList(e) {
   var bodies = $('.card-body');
   var eachtitle = '';
   var eachbody = '';
-  for (var i = 0; i < (titles.length || bodies.length); i++) { 
+  for (var i = 0; i < (titles.length || bodies.length); i++) {
     eachtitle = titles[i].innerText;
     eachbody = bodies[i].innerText;
     var searchInputTitle = eachtitle.includes($searchBar.val());
