@@ -55,8 +55,8 @@ function pushToStorage(id, object){
 
 function deleteCard() {
   var id = this.closest('article').getAttribute('id');
-  localStorage.removeItem(id);
   this.closest('article').remove();
+  localStorage.removeItem(id);
 };
 
 function editTitle(card) {
@@ -151,19 +151,41 @@ function downVote() {
 //   pushToStorage(id, parsedObject);
 // };
 
-function searchList(e) {
-  event.preventDefault();
+// function searchList() {
+//   var titles = $('h2');
+//   var bodies = $('.card-body');
+//   var page = [titles, bodies]
+//   //sets variables for the titles and body text on the page
+//   page.forEach(function(text{
+//     console.log(text);
+//     if (searchInputTitle === false && searchInputBody === false) {
+//       //if the loop and what's on the page don't match, hide the card
+//       $($('h2')[i]).parent().hide();
+//     } else if (searchInputTitle === true || searchInputBody === true) {
+//       //if the loop and what's on the page match, show the card
+//       $($('h2')[i]).parent().show();
+//     };
+//   }))
+
+function searchList() {
   var titles = $('h2');
   var bodies = $('.card-body');
-  var eachtitle = '';
-  var eachbody = '';
+  var page = [titles, bodies]
+  //sets variables for the titles and body text on the page
   for (var i = 0; i < (titles.length || bodies.length); i++) {
-    eachtitle = titles[i].innerText;
-    eachbody = bodies[i].innerText;
+    //for loop to loop through all titles of bodies on page
+    var eachtitle = titles[i].innerText;
+    //eachtitle becomes wherever the loop is on h2s on page
+    var eachbody = bodies[i].innerText;
+    //each body becomes wherever the loop is on body text on page
     var searchInputTitle = eachtitle.includes($('.search-input').val());
+    //compares the loop title index h2 to what's in search input
     var searchInputBody = eachbody.includes($('.search-input').val());
+    //compares the loop body index to what's in search input
   if (searchInputTitle === false && searchInputBody === false) {
+    //if the loop and what's on the page don't match, hide the card
     $($('h2')[i]).parent().hide();
   } else if (searchInputTitle === true || searchInputBody === true) {
+    //if the loop and what's on the page match, show the card
     $($('h2')[i]).parent().show();
 }}};
