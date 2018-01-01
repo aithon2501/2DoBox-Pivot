@@ -2,6 +2,8 @@ $('.title-input').focus();
 $('.save-button').on('click', newToDo);
 $('.toDo-list').on('blur', '.card', editTitle);
 $('.toDo-list').on('blur', '.card', edittask);
+$('.toDo-list').on('keydown', '.card', enterButtonSubmits);
+
 $('.search-input').on('keyup', searchList);
 $('.title-input').on('keyup', disabledToggleTitle);
 $('.task-input').on('keyup', disabledToggleTask);
@@ -77,7 +79,7 @@ function edittask(card) {
   var id = $(this).attr('id');
   var pulledObject = localStorage.getItem(id);
   var parsedObject = JSON.parse(pulledObject);
-  var usertask = $(this).find('.card-task').text();
+  var usertask = $(this).find('.card-body').text();
   parsedObject.task = usertask;
   pushToStorage(id, parsedObject);
 };
@@ -147,5 +149,12 @@ function disabledToggleTask (){
     $saveButton.attr('disabled', false);
   } else {
     $saveButton.attr('disabled', true);
+  }
+}
+
+function enterButtonSubmits(e){
+  if(e.keycode === 13){
+    $(this).attr('contenteditable', false);
+    $(this).blur();
   }
 }
