@@ -120,11 +120,10 @@ function searchList() {
   var titles = $('h2');
   var bodies = $('.card-body');
   for (var i = 0; i < (titles.length || bodies.length); i++) {
-    var eachtitle = titles[i].innerText;
-    var eachtask = bodies[i].innerText;
-    var searchInputTitle = eachtitle.includes($('.search-input').val());
-    var searchInputtask = eachtask.includes($('.search-input').val());
-
+    var eachtitle = titles[i].innerText.trim().toLowerCase();
+    var eachtask = bodies[i].innerText.trim().toLowerCase();
+    var searchInputTitle = eachtitle.includes($('.search-input').val().trim().toLowerCase());
+    var searchInputtask = eachtask.includes($('.search-input').val().trim().toLowerCase());
     if (searchInputTitle === false && searchInputtask === false) {
     $($('h2')[i]).parent().hide();
   } else if (searchInputTitle === true || searchInputtask === true) {
