@@ -1,7 +1,7 @@
 $('.title-input').focus();
 $('.save-button').on('click', newToDo);
 $('.toDo-list').on('blur', '.card', editTitle);
-$('.toDo-list').on('blur', '.card', edittask);
+$('.toDo-list').on('blur', '.card', editTask);
 $('.filter-input').on('keyup', filterList);
 $('.title-input').on('keyup', disableButton);
 $('.task-input').on('keyup', disableButton);
@@ -9,8 +9,9 @@ $('.save-button').on('click', disableButton);
 $('.toDo-list').on('click', '.delete-button', deleteCard);
 $('.toDo-list').on('click', '.up-vote', upVote);
 $('.toDo-list').on('click', '.down-vote', downVote);
+$('.card-body').on('keyup', )
 
-
+disableButton();
 retrieveCard();
 
 function newToDo(event) {
@@ -68,16 +69,16 @@ function editTitle(card) {
   var id = $(this).attr('id');
   var pulledObject = localStorage.getItem(id);
   var parsedObject = JSON.parse(pulledObject);
-  var userTitle = $(this).find('.card-title').text();
+  var userTitle = $(this).text();
   parsedObject.title = userTitle;
   pushToStorage(id, parsedObject);
 };
 
-function edittask(card) {
+function editTask(card) {
   var id = $(this).attr('id');
   var pulledObject = localStorage.getItem(id);
   var parsedObject = JSON.parse(pulledObject);
-  var usertask = $(this).find('.card-task').text();
+  var usertask = $(this).text();
   parsedObject.task = usertask;
   pushToStorage(id, parsedObject);
 };
@@ -119,17 +120,27 @@ function downVote() {
 function filterList() {
   var titles = $('h2');
   var bodies = $('.card-body');
+  var searchInput = $('.filter-input').val().trim().toLowerCase();
   for (var i = 0; i < (titles.length || bodies.length); i++) {
-    var eachtitle = titles[i].innerText;
-    var eachtask = bodies[i].innerText;
-    var filterInputTitle = eachtitle.includes($('.filter-input').val().trim().toUpperCase());
-    var filterInputtask = eachtask.includes($('.filter-input').val().trim().toUpperCase());
+    var eachTitle = titles[i].innerText.trim().toLowerCase();
+    var eachTask = bodies[i].innerText.trim().toLowerCase();
+  
+  // if (searchInput === eachTitle.includes() || eachTask.includes()) {
+  //   $($('h2')[i]).parent().show();
+  // } else if (searchInput !== eachTitle || eachTask) {
+  //   $($('h2')[i]).parent().hide();
+  //   };  
+
+    var filterInputTitle = eachTitle.includes($('.filter-input').val().trim().toLowerCase());
+    var filterInputtask = eachTask.includes($('.filter-input').val().trim().toLowerCase());
 
     if (filterInputTitle === false && filterInputtask === false) {
     $($('h2')[i]).parent().hide();
   } else if (filterInputTitle === true || filterInputtask === true) {
     $($('h2')[i]).parent().show();
-  }}};
+    };
+   }
+ };
 
 function disableButton (){
   var $taskInput = $('.task-input');
@@ -139,5 +150,12 @@ function disableButton (){
     $saveButton.attr('disabled', false);
   } else {
     $saveButton.attr('disabled', true);
+  }
+}
+
+function enterButtonSubmits () {
+  if (e.keycode === 13) {
+    $(this).attr('contenteditable', true);
+    $(this).blur();
   }
 }
