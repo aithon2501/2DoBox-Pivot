@@ -176,7 +176,7 @@ textarea {
   resize: none;
 }
 
-.body-input {
+.task-input {
   height: 120px;
   overflow-wrap: normal;
 }
@@ -203,7 +203,7 @@ textarea {
   width: 80%;
 }
 
-.idea-list {
+.toDo-list {
   bottom: 0;
   height: 300px;
   overflow: scroll;
@@ -214,4 +214,4 @@ textarea {
   width: 80%;
 }
 
-}
+

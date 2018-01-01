@@ -5,6 +5,7 @@
   <link rel="stylesheet" type="text/css" href="style.css">
   <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  <link rel="icon" type="x-icon" href="FEE-ideabox-icon-assets/2Do-icon.png">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>2DoBox</title>
 </head>
@@ -12,15 +13,19 @@
   <header>
     <h1 class="title">2Do<span>box</span></h1>
     <form action="">
+      <label for="title-input"></label>
       <input class="inputs title-input" type="text" placeholder="Title">
-      <textarea class="inputs body-input" type="text" placeholder="Task" wrap="hard" rows="3"></textarea>
-      <button class="save-button" disabled>save</button>
+      <label for="task-input"></label>
+      <textarea class="inputs task-input" type="text" placeholder="Task" wrap="hard" rows="3"></textarea>
+      <label for="save-button"></label>
+      <button class="save-button">save</button>
     </form>
   </header>
   <section class="search">
+    <label for="search-input"></label>
     <input class="search-input" type="text" placeholder="Search">
   </section>
-  <section class="idea-list">
+  <section class="toDo-list">
   </section>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script type="text/javascript" src="script.js"></script>
