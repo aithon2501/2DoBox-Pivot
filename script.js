@@ -118,7 +118,7 @@ function downVote() {
 
 function searchList() {
   var titles = $('h2');
-  var bodies = $('.card-task');
+  var bodies = $('.card-body');
   for (var i = 0; i < (titles.length || bodies.length); i++) {
     var eachtitle = titles[i].innerText;
     var eachtask = bodies[i].innerText;
