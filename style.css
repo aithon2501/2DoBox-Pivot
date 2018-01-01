@@ -9,13 +9,13 @@ input {
 }
 
 header {
-  background-color: #E5F3F2;
+  background-color: #f3e5e6;
   text-align: center;
   width: 100%;
 }
 
 .title {
-  color: #00A79D;
+  color: #a7005a;
   font-size: 2.5em;
   margin-bottom: 15px;
   padding-top: 20px;
@@ -40,7 +40,7 @@ span {
 .save-button {
   border-radius: 0;
   border: none;
-  background-color: #00A79D;
+  background-color: #a7005a;
   color: #FFFFFF;
   font-size: 1em;
   margin: 5px 0 10px 0;
@@ -50,7 +50,12 @@ span {
 }
 
 .save-button:hover {
-  background-color: #045E55;
+  background-color: #5e0404;
+}
+
+.save-button:disabled:hover, button:disabled {
+  opacity: 0.5;
+  background-color: #a7005a;
 }
 
 ::placeholder {
@@ -63,7 +68,7 @@ span {
 }
 
 .search-input {
-  border: 0.05em solid #C1C2C4
+  border: 0.05em solid #C1C2C4;
   font-size: 1em;
   max-width: 500px;
   right: 33%;
@@ -207,10 +212,6 @@ textarea {
 
 .card {
   width: 80%;
-}
-
-div {
-  display: none;
 }
 
 

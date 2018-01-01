@@ -3,9 +3,13 @@ $('.save-button').on('click', newToDo);
 $('.toDo-list').on('blur', '.card', editTitle);
 $('.toDo-list').on('blur', '.card', edittask);
 $('.search-input').on('keyup', searchList);
+$('.title-input').on('keyup', disabledToggleTitle);
+$('.task-input').on('keyup', disabledToggleTask);
+$('.save-button').on('click', disabledToggleTitle);
 $('.toDo-list').on('click', '.delete-button', deleteCard);
 $('.toDo-list').on('click', '.up-vote', upVote);
 $('.toDo-list').on('click', '.down-vote', downVote);
+
 
 retrieveCard();
 
@@ -126,3 +130,23 @@ function searchList() {
   } else if (searchInputTitle === true || searchInputtask === true) {
     $($('h2')[i]).parent().show();
   }}};
+
+function disabledToggleTitle (){
+  var $titleInput = $('.title-input');
+  var $saveButton = $('.save-button');
+  if($titleInput.val()){
+    $saveButton.attr('disabled', false);
+  } else {
+    $saveButton.attr('disabled', true);
+  }
+}
+
+function disabledToggleTask (){
+  var $titleInput = $('.body-input');
+  var $saveButton = $('.save-button');
+  if($titleInput.val()){
+    $saveButton.attr('disabled', false);
+  } else {
+    $saveButton.attr('disabled', true);
+  }
+}
