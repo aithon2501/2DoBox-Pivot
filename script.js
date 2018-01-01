@@ -5,6 +5,9 @@ $('.search-input').on('keyup', searchList);
 $('.idea-list').on('click', '.delete-button', deleteCard);
 $('.idea-list').on('click', '.up-vote', upVote);
 $('.idea-list').on('click', '.down-vote', downVote);
+$('.title-input').on('keyup', disabledToggleTitle);
+$('.body-input').on('keyup', disabledToggleTask);
+$('.save-button').on('click', disabledToggleTitle);
 
 retrieveCard();
 
@@ -124,3 +127,23 @@ function searchList() {
   } else if (searchInputTitle === true || searchInputBody === true) {
     $($('h2')[i]).parent().show();
   }}};
+
+function disabledToggleTitle (){
+  var $titleInput = $('.title-input');
+  var $saveButton = $('.save-button');
+  if($titleInput.val()){
+    $saveButton.attr('disabled', false);
+  } else {
+    $saveButton.attr('disabled', true);
+  }
+}
+
+function disabledToggleTask (){
+  var $titleInput = $('.body-input');
+  var $saveButton = $('.save-button');
+  if($titleInput.val()){
+    $saveButton.attr('disabled', false);
+  } else {
+    $saveButton.attr('disabled', true);
+  }
+}
