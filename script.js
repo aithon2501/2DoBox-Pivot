@@ -1,41 +1,43 @@
-$('.save-button').on('click', newIdea);
-$('.idea-list').on('blur', '.card', editTitle);
-$('.idea-list').on('blur', '.card', editBody);
+$('.title-input').focus();
+$('.save-button').on('click', newToDo);
+$('.toDo-list').on('blur', '.card', editTitle);
+$('.toDo-list').on('blur', '.card', edittask);
 $('.search-input').on('keyup', searchList);
-$('.idea-list').on('click', '.delete-button', deleteCard);
-$('.idea-list').on('click', '.up-vote', upVote);
-$('.idea-list').on('click', '.down-vote', downVote);
+$('.toDo-list').on('click', '.delete-button', deleteCard);
+$('.toDo-list').on('click', '.up-vote', upVote);
+$('.toDo-list').on('click', '.down-vote', downVote);
 
 retrieveCard();
 
-function newIdea(event) {
+function newToDo(event) {
   event.preventDefault();
   var title = $('.title-input');
-  var body = $('.body-input');
-  var newCard = new MakeCard(title.val(), body.val());
+  var task = $('.task-input');
+  var newCard = new MakeCard(title.val(), task.val());
   appendCard(newCard);
   pushToStorage(newCard.uniqueid, newCard)
   title.val('');
-  body.val('');
+  task.val('');
+  title.focus();
 };
 
-function MakeCard(title, body, quality) {
+function MakeCard(title, task, importance) {
   this.title = title;
-  this.body = body;
-  this.quality = "quality: swill";
+  this.task = task;
+  this.importance = "importance: swill";
   this.uniqueid = Date.now();
   };
 
-function appendCard(ideaCard) {
-  $('.idea-list').prepend(
-    `<article class="card" id="${ideaCard.uniqueid}">
-      <h2 class="card-title" contenteditable="true">${ideaCard.title}</h2>
+function appendCard(toDoCard) {
+  $('.toDo-list').prepend(
+    `<article class="card" id="${toDoCard.uniqueid}">
+      <h2 class="card-title" contenteditable="true">${toDoCard.title}</h2>
       <button class="card-buttons delete-button"></button>
-      <p class="card-body" contenteditable="true">${ideaCard.body}</p>
+      <p class="card-body" contenteditable="true">${toDoCard.task}</p>
       <nav>
         <button class="card-buttons up-vote"></button>
         <button class="card-buttons down-vote"></button>
-        <p class="quality">${ideaCard.quality}</p>
+        <p class="importance">${toDoCard.importance}</p>
       </nav>
     </article>`)
 };
@@ -67,12 +69,12 @@ function editTitle(card) {
   pushToStorage(id, parsedObject);
 };
 
-function editBody(card) {
+function edittask(card) {
   var id = $(this).attr('id');
   var pulledObject = localStorage.getItem(id);
   var parsedObject = JSON.parse(pulledObject);
-  var userBody = $(this).find('.card-body').text();
-  parsedObject.body = userBody;
+  var usertask = $(this).find('.card-task').text();
+  parsedObject.task = usertask;
   pushToStorage(id, parsedObject);
 };
 
@@ -80,15 +82,15 @@ function upVote() {
  var id = $(this).parents('.card').attr('id');
  var pulledObject = localStorage.getItem(id);
  var parsedObject = JSON.parse(pulledObject);
- var initialQuality = $(this).siblings('.quality').text();
+ var initialImportance = $(this).siblings('.importance').text();
    console.log(parsedObject);
 
- if (initialQuality === 'quality: swill') {
-   $(this).siblings('.quality').text('quality: plausible');
-   parsedObject.quality = 'quality: plausible';
-} else if ($(this).siblings('.quality').text() === 'quality: plausible'){
-   $(this).siblings('.quality').text('quality: genius')
-   parsedObject.quality = 'quality: genius';
+ if (initialImportance === 'importance: swill') {
+   $(this).siblings('.importance').text('importance: plausible');
+   parsedObject.importance = 'importance: plausible';
+} else if ($(this).siblings('.importance').text() === 'importance: plausible'){
+   $(this).siblings('.importance').text('importance: genius')
+   parsedObject.importance = 'importance: genius';
  }
    pushToStorage(id, parsedObject);
  };
@@ -97,30 +99,30 @@ function downVote() {
  var id = $(this).parents('.card').attr('id');
  var pulledObject = localStorage.getItem(id);
  var parsedObject = JSON.parse(pulledObject);
- var initialQuality = $(this).siblings('.quality').text();
+ var initialImportance = $(this).siblings('.importance').text();
    console.log(parsedObject);
 
- if (initialQuality === 'quality: genius') {
-   $(this).siblings('.quality').text('quality: plausible');
-   parsedObject.quality = 'quality: plausible';
-} else if ($(this).siblings('.quality').text() === 'quality: plausible'){
-   $(this).siblings('.quality').text('quality: swill')
-   parsedObject.quality = 'quality: swill';
+ if (initialImportance === 'importance: genius') {
+   $(this).siblings('.importance').text('importance: plausible');
+   parsedObject.importance = 'importance: plausible';
+} else if ($(this).siblings('.importance').text() === 'importance: plausible'){
+   $(this).siblings('.importance').text('importance: swill')
+   parsedObject.importance = 'importance: swill';
  }
    pushToStorage(id, parsedObject);
  };
 
 function searchList() {
   var titles = $('h2');
-  var bodies = $('.card-body');
+  var bodies = $('.card-task');
   for (var i = 0; i < (titles.length || bodies.length); i++) {
     var eachtitle = titles[i].innerText;
-    var eachbody = bodies[i].innerText;
+    var eachtask = bodies[i].innerText;
     var searchInputTitle = eachtitle.includes($('.search-input').val());
-    var searchInputBody = eachbody.includes($('.search-input').val());
+    var searchInputtask = eachtask.includes($('.search-input').val());
 
-    if (searchInputTitle === false && searchInputBody === false) {
+    if (searchInputTitle === false && searchInputtask === false) {
     $($('h2')[i]).parent().hide();
-  } else if (searchInputTitle === true || searchInputBody === true) {
+  } else if (searchInputTitle === true || searchInputtask === true) {
     $($('h2')[i]).parent().show();
   }}};
