@@ -62,12 +62,12 @@ span {
   color: #C1C2C4;
 }
 
-.search {
+.filter {
   margin: 10px 0;
   text-align: center;
 }
 
-.search-input {
+.filter-input {
   border: 0.05em solid #C1C2C4;
   font-size: 1em;
   max-width: 500px;
@@ -95,6 +95,8 @@ span {
   font-family: 'Open Sans', sans-serif;
   font-size: .75em;
   margin: 5px 0px;
+  overflow: auto;
+  height: 50px;
 }
 
 .card-buttons {
@@ -149,7 +151,7 @@ textarea {
   background-image: url('FEE-ideabox-icon-assets/downvote-hover.svg');
 }
 
-.quality {
+.importance {
   color: #6D6E71;
   display: inline;
   font-size: .75em;
@@ -192,13 +194,13 @@ textarea {
   width: 80%;
 }
 
-.search {
+.filter {
   height: 30px;
   margin: 10px 0;
   width: 100%;
 }
 
-.search-input {
+.filter-input {
   font-size: 1.2em;
   width: 80%;
 }
