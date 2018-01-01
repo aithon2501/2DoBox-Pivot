@@ -142,7 +142,7 @@ function disabledToggleTitle (){
 }
 
 function disabledToggleTask (){
-  var $titleInput = $('.body-input');
+  var $titleInput = $('.task-input');
   var $saveButton = $('.save-button');
   if($titleInput.val()){
     $saveButton.attr('disabled', false);
