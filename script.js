@@ -28,7 +28,7 @@ function newToDo(event) {
 function MakeCard(title, task, importance) {
   this.title = title;
   this.task = task;
-  this.importance = "importance: swill";
+  this.importance = "importance: none";
   this.uniqueid = Date.now();
   };
 
@@ -89,12 +89,18 @@ function upVote() {
  var initialImportance = $(this).siblings('.importance').text();
    console.log(parsedObject);
 
- if (initialImportance === 'importance: swill') {
-   $(this).siblings('.importance').text('importance: plausible');
-   parsedObject.importance = 'importance: plausible';
-} else if ($(this).siblings('.importance').text() === 'importance: plausible'){
-   $(this).siblings('.importance').text('importance: genius')
-   parsedObject.importance = 'importance: genius';
+ if (initialImportance === 'importance: none') {
+   $(this).siblings('.importance').text('importance: low');
+   parsedObject.importance = 'importance: low';
+} else if ($(this).siblings('.importance').text() === 'importance: low'){
+   $(this).siblings('.importance').text('importance: normal')
+   parsedObject.importance = 'importance: normal';
+ } else if ($(this).siblings('.importance').text() === 'importance: normal'){
+   $(this).siblings('.importance').text('importance: high')
+   parsedObject.importance = 'importance: high';
+ } else if ($(this).siblings('.importance').text() === 'importance: high'){
+   $(this).siblings('.importance').text('importance: critical')
+   parsedObject.importance = 'importance: critical';
  }
    pushToStorage(id, parsedObject);
  };
@@ -104,13 +110,19 @@ function downVote() {
  var pulledObject = localStorage.getItem(id);
  var parsedObject = JSON.parse(pulledObject);
  var initialImportance = $(this).siblings('.importance').text();
- if (initialImportance === 'importance: genius') {
-   $(this).siblings('.importance').text('importance: plausible');
-   parsedObject.importance = 'importance: plausible';
-} else if ($(this).siblings('.importance').text() === 'importance: plausible'){
-   $(this).siblings('.importance').text('importance: swill')
-   parsedObject.importance = 'importance: swill';
- }
+ if (initialImportance === 'importance: critical') {
+   $(this).siblings('.importance').text('importance: high');
+   parsedObject.importance = 'importance: high';
+} else if ($(this).siblings('.importance').text() === 'importance: high'){
+   $(this).siblings('.importance').text('importance: normal')
+   parsedObject.importance = 'importance: normal';
+ } else if ($(this).siblings('.importance').text() === 'importance: normal'){
+    $(this).siblings('.importance').text('importance: low')
+    parsedObject.importance = 'importance: low';
+  } else if ($(this).siblings('.importance').text() === 'importance: low'){
+     $(this).siblings('.importance').text('importance: none')
+     parsedObject.importance = 'importance: none';
+   }
    pushToStorage(id, parsedObject);
  };
 
