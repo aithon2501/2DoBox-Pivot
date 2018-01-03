@@ -68,7 +68,7 @@ function editTitle(card) {
   var id = $(this).attr('id');
   var pulledObject = localStorage.getItem(id);
   var parsedObject = JSON.parse(pulledObject);
-  var userTitle = $(this).find('.card-title').text(); 
+  var userTitle = $(this).find('.card-title').text();
   parsedObject.title = userTitle;
   pushToStorage(id, parsedObject);
 };
@@ -104,8 +104,6 @@ function downVote() {
  var pulledObject = localStorage.getItem(id);
  var parsedObject = JSON.parse(pulledObject);
  var initialImportance = $(this).siblings('.importance').text();
-   console.log(parsedObject);
-
  if (initialImportance === 'importance: genius') {
    $(this).siblings('.importance').text('importance: plausible');
    parsedObject.importance = 'importance: plausible';
@@ -116,30 +114,24 @@ function downVote() {
    pushToStorage(id, parsedObject);
  };
 
-function filterList() {
-  var titles = $('h2');
-  var bodies = $('.card-body');
-  var searchInput = $('.filter-input').val().trim().toLowerCase();
-  for (var i = 0; i < (titles.length || bodies.length); i++) {
-    var eachTitle = titles[i].innerText.trim().toLowerCase();
-    var eachTask = bodies[i].innerText.trim().toLowerCase();
-  
-  // if (searchInput === eachTitle.includes() || eachTask.includes()) {
-  //   $($('h2')[i]).parent().show();
-  // } else if (searchInput !== eachTitle || eachTask) {
-  //   $($('h2')[i]).parent().hide();
-  //   };  
+function vote(id){
+  var id = $(this).parents('.card').attr('id');
+  var pulledObject = localStorage.getItem(id);
+  var parsedObject = JSON.parse(pulledObject);
+  var initialImportance = $(this).siblings('.importance').text();
+}
 
-    var filterInputTitle = eachTitle.includes($('.filter-input').val().trim().toLowerCase());
-    var filterInputtask = eachTask.includes($('.filter-input').val().trim().toLowerCase());
-
-    if (filterInputTitle === false && filterInputtask === false) {
-    $($('h2')[i]).parent().hide();
-  } else if (filterInputTitle === true || filterInputtask === true) {
-    $($('h2')[i]).parent().show();
-    };
+function filterList(){
+ var searchRequest = $('.filter-input').val().toLowerCase();
+ $('.card').each(function(){
+   var searchResult = $(this).text().toLowerCase().indexOf(searchRequest);
+   if(searchResult > -1){
+     $(this).show();
+   } else {
+     $(this).hide();
    }
- };
+ })
+}
 
 function disableButton (){
   var $taskInput = $('.task-input');
@@ -151,4 +143,3 @@ function disableButton (){
     $saveButton.attr('disabled', true);
   }
 }
-
