@@ -9,8 +9,12 @@ $('.save-button').on('click', disableButton);
 $('.toDo-list').on('click', '.delete-button', deleteCard);
 $('.toDo-list').on('click', '.up-vote', upVote);
 $('.toDo-list').on('click', '.down-vote', downVote);
+<<<<<<< HEAD
 $('.toDo-list').on('click', '.task-complete', getComplete);
 $('.toDo-list').on('click', '.show-completed-tasks-button', showCompletedTasks)
+=======
+$('.toDo-list').on('click', '.task-complete-button', completeTask);
+>>>>>>> master
 
 disableButton();
 retrieveCard();
@@ -45,7 +49,7 @@ function appendCard(toDoCard) {
         <button class="card-buttons up-vote"></button>
         <button class="card-buttons down-vote"></button>
         <p class="importance">${toDoCard.importance}</p>
-        <button class="task-complete">Task Complete</button>
+        <button class="task-complete-button">COMPLETE</button>
       </nav>
     </article>`)
 };
@@ -93,8 +97,6 @@ function upVote() {
  var pulledObject = localStorage.getItem(id);
  var parsedObject = JSON.parse(pulledObject);
  var initialImportance = $(this).siblings('.importance').text();
-   console.log(parsedObject);
-
  if (initialImportance === 'importance: none') {
    $(this).siblings('.importance').text('importance: low');
    parsedObject.importance = 'importance: low';
@@ -175,6 +177,7 @@ function getComplete() {
   var id = $(this).parents('.card').attr('id');
   var pulledObject = localStorage.getItem(id);
   var parsedObject = JSON.parse(pulledObject);
+<<<<<<< HEAD
 
   if (parsedObject.completed === false) {  
   completeTask(id, parsedObject);
@@ -196,3 +199,12 @@ function showCompletedTasks() {
   }
 }
     
+=======
+  parsedObject.completed = true;
+
+  var complete = $(this).parent().parent()
+  complete.toggleClass('taskComplete');
+    
+  pushToStorage(id, parsedObject);
+}
+>>>>>>> master

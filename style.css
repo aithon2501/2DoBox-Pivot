@@ -4,7 +4,7 @@
   font-family: 'Roboto Slab', serif;
   margin: auto;
 }
-
+/* styles for elements */
 header {
   background-color: #f3e5e6;
   text-align: center;
@@ -25,7 +25,9 @@ textarea {
   outline: none;
   resize: none;
 }
+/* end styles for elements */
 
+/* styles for header */
 .title {
   color: #a7005a;
   font-size: 2.5em;
@@ -69,7 +71,9 @@ textarea {
 ::placeholder {
   color: #C1C2C4;
 }
+/* end styles for header */
 
+/* styles fo filter bar */
 .filter {
   margin: 10px 0;
   text-align: center;
@@ -82,29 +86,15 @@ textarea {
   right: 33%;
   width: 50%;
 }
+/* end styles for filter bar */
 
+/* general styles for cards */
 .card {
   border-bottom: 1px solid #d1d3d4;
   margin-top: 10px;
   max-width: 500px;
   position: relative;
   width: 50%;
-}
-
-.taskComplete {
-  background-color: #D3D3D3;
-  text-decoration: line-through;
-}
-
-.taskComplete h2 {
-  text-decoration: line-through;
-}
-
-.card-title {
-  color: #6D6E71;
-  display: inline-block;
-  font-size: 1.2em;
-
 }
 
 .card-body {
@@ -116,6 +106,12 @@ textarea {
   height: 50px;
 }
 
+.card-title {
+  color: #6D6E71;
+  display: inline-block;
+  font-size: 1.2em;
+}
+
 .card-buttons {
   background-color: transparent;
   border: none;
@@ -123,6 +119,18 @@ textarea {
   padding: 0;
 }
 
+.importance {
+  color: #6D6E71;
+  display: inline;
+  font-size: .75em;
+}
+
+nav {
+  margin-bottom: 20px;
+}
+/* end general styles for cards */
+
+/* styles for delete button on cards */
 .delete-button {
   background-image: url('FEE-ideabox-icon-assets/delete.svg');
   height: 20px;
@@ -135,7 +143,9 @@ textarea {
 .delete-button:hover {
   background-image: url('FEE-ideabox-icon-assets/delete-hover.svg');
 }
+/* end styles for delete button on cards */
 
+<<<<<<< HEAD
 .task-complete {
   float:right;
   margin-top:6px;
@@ -145,6 +155,9 @@ textarea {
   display: block;
 }
 
+=======
+/* styles for upvote and downvote buttons */
+>>>>>>> master
 .up-vote {
   background-image: url('FEE-ideabox-icon-assets/upvote.svg');
   height: 20px;
@@ -169,16 +182,25 @@ textarea {
 .down-vote:hover {
   background-image: url('FEE-ideabox-icon-assets/downvote-hover.svg');
 }
+/* end styles for upvote and downvote buttons */
 
-.importance {
-  color: #6D6E71;
-  display: inline;
-  font-size: .75em;
+/* begin styles for task complete */
+.taskComplete {
+  background-color: #D3D3D3;
+  text-decoration: line-through;
 }
 
-nav {
-  margin-bottom: 20px;
+.taskComplete h2 {
+  text-decoration: line-through;
 }
+
+.task-complete-button {
+  background-color: #B90054;
+  color: white;
+  float: right;
+  margin: .3rem .3rem;
+}
+/* end styles for task complete */
 
 @media screen and (max-width: 500px) {
 
