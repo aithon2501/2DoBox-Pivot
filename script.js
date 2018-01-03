@@ -2,8 +2,6 @@ $('.title-input').focus();
 $('.save-button').on('click', newToDo);
 $('.toDo-list').on('blur', '.card', editTitle);
 $('.toDo-list').on('blur', '.card', edittask);
-$('.toDo-list').on('keydown', '.card', enterButtonSubmits);
-
 $('.search-input').on('keyup', searchList);
 $('.title-input').on('keyup', disabledToggleTitle);
 $('.task-input').on('keyup', disabledToggleTask);
@@ -149,12 +147,5 @@ function disabledToggleTask (){
     $saveButton.attr('disabled', false);
   } else {
     $saveButton.attr('disabled', true);
-  }
-}
-
-function enterButtonSubmits(e){
-  if(e.keycode === 13){
-    $(this).attr('contenteditable', false);
-    $(this).blur();
   }
 }
