@@ -136,6 +136,15 @@ textarea {
   background-image: url('FEE-ideabox-icon-assets/delete-hover.svg');
 }
 
+.task-complete {
+  float:right;
+  margin-top:6px;
+}
+
+.show-completed-tasks-button {
+  display: block;
+}
+
 .up-vote {
   background-image: url('FEE-ideabox-icon-assets/upvote.svg');
   height: 20px;
