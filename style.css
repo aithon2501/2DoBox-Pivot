@@ -1,11 +1,8 @@
+/* don't use universal selectors, I know. If I had built this, I wouldnt dare */
 * {
   box-sizing: border-box;
   font-family: 'Roboto Slab', serif;
   margin: auto;
-}
-
-input {
-  outline: none;
 }
 
 header {
@@ -14,15 +11,26 @@ header {
   width: 100%;
 }
 
+input {
+  outline: none;
+}
+
+span {
+  color: #6D6E71;
+}
+
+textarea {
+  border: none;
+  height: 25px;
+  outline: none;
+  resize: none;
+}
+
 .title {
   color: #a7005a;
   font-size: 2.5em;
   margin-bottom: 15px;
   padding-top: 20px;
-}
-
-span {
-  color: #6D6E71;
 }
 
 .inputs {
@@ -126,18 +134,6 @@ span {
 
 .delete-button:hover {
   background-image: url('FEE-ideabox-icon-assets/delete-hover.svg');
-}
-
-.task-complete {
-  float: right;
-  margin-top: 6px;
-}
-
-textarea {
-  border: none;
-  height: 25px;
-  outline: none;
-  resize: none;
 }
 
 .up-vote {
