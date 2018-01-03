@@ -68,7 +68,7 @@ function editTitle(card) {
   var id = $(this).attr('id');
   var pulledObject = localStorage.getItem(id);
   var parsedObject = JSON.parse(pulledObject);
-  var userTitle = $(this).find('.card-title').text(); 
+  var userTitle = $(this).find('.card-title').text();
   parsedObject.title = userTitle;
   pushToStorage(id, parsedObject);
 };
@@ -104,8 +104,6 @@ function downVote() {
  var pulledObject = localStorage.getItem(id);
  var parsedObject = JSON.parse(pulledObject);
  var initialImportance = $(this).siblings('.importance').text();
-   console.log(parsedObject);
-
  if (initialImportance === 'importance: genius') {
    $(this).siblings('.importance').text('importance: plausible');
    parsedObject.importance = 'importance: plausible';
@@ -116,21 +114,24 @@ function downVote() {
    pushToStorage(id, parsedObject);
  };
 
-function filterList() {
-  var titles = $('h2');
-  var bodies = $('.card-body');
-  for (var i = 0; i < (titles.length || bodies.length); i++) {
-    var eachtitle = titles[i].innerText.trim().toLowerCase();
-    var eachtask = bodies[i].innerText.trim().toLowerCase();
-    var searchInputTitle = eachtitle.includes($('.search-input').val().trim().toLowerCase());
-    var searchInputtask = eachtask.includes($('.search-input').val().trim().toLowerCase());
-    if (searchInputTitle === false && searchInputtask === false) {
-    $($('h2')[i]).parent().hide();
-  } else if (filterInputTitle === true || filterInputtask === true) {
-    $($('h2')[i]).parent().show();
-    };
+function vote(id){
+  var id = $(this).parents('.card').attr('id');
+  var pulledObject = localStorage.getItem(id);
+  var parsedObject = JSON.parse(pulledObject);
+  var initialImportance = $(this).siblings('.importance').text();
+}
+
+function filterList(){
+ var searchRequest = $('.filter-input').val().toLowerCase();
+ $('.card').each(function(){
+   var searchResult = $(this).text().toLowerCase().indexOf(searchRequest);
+   if(searchResult > -1){
+     $(this).show();
+   } else {
+     $(this).hide();
    }
- };
+ })
+}
 
 function disableButton (){
   var $taskInput = $('.task-input');
