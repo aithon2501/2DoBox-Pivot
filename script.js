@@ -164,7 +164,9 @@ function completeTask () {
   var pulledObject = localStorage.getItem(id);
   var parsedObject = JSON.parse(pulledObject);
   parsedObject.completed = true;
-  var complete = $(this).parent().parent().className = 'taskComplete'; 
-    console.log(complete);
+  var complete = $(this).parent().parent();
+  console.log(complete);
+  complete.toggleClass('taskComplete');
+
   pushToStorage(id, parsedObject);
 }
