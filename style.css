@@ -83,6 +83,11 @@ span {
   width: 50%;
 }
 
+.taskComplete {
+  background-color: #6A6C6E;
+  text-decoration: line-through;
+}
+
 .card-title {
   color: #6D6E71;
   display: inline-block;
@@ -117,6 +122,11 @@ span {
 
 .delete-button:hover {
   background-image: url('FEE-ideabox-icon-assets/delete-hover.svg');
+}
+
+.task-complete {
+  float: right;
+  margin-top: 6px;
 }
 
 textarea {
@@ -215,5 +225,4 @@ textarea {
 .card {
   width: 80%;
 }
-
 

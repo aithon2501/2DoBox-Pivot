@@ -9,6 +9,7 @@ $('.save-button').on('click', disableButton);
 $('.toDo-list').on('click', '.delete-button', deleteCard);
 $('.toDo-list').on('click', '.up-vote', upVote);
 $('.toDo-list').on('click', '.down-vote', downVote);
+$('.toDo-list').on('click', '.task-complete', completeTask);
 
 disableButton();
 retrieveCard();
@@ -29,6 +30,7 @@ function MakeCard(title, task, importance) {
   this.title = title;
   this.task = task;
   this.importance = "importance: swill";
+  this.completed = false;
   this.uniqueid = Date.now();
   };
 
@@ -42,6 +44,7 @@ function appendCard(toDoCard) {
         <button class="card-buttons up-vote"></button>
         <button class="card-buttons down-vote"></button>
         <p class="importance">${toDoCard.importance}</p>
+        <button class="task-complete">Task Complete</button>
       </nav>
     </article>`)
 };
@@ -150,5 +153,15 @@ function disableButton (){
   } else {
     $saveButton.attr('disabled', true);
   }
+}
+
+function completeTask () {
+  var id = $(this).parents('.card').attr('id');
+  var pulledObject = localStorage.getItem(id);
+  var parsedObject = JSON.parse(pulledObject);
+  parsedObject.completed = true;
+  var complete = $(this).parent().parent().className = 'taskComplete'; 
+    console.log(complete);
+  pushToStorage(id, parsedObject);
 }
 
