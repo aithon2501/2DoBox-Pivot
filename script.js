@@ -53,7 +53,9 @@ function retrieveCard(){
   for(var i=0; i < localStorage.length; i++) {
   var retrievedObject = localStorage.getItem(localStorage.key(i));
   var parsedObject = JSON.parse(retrievedObject);
-  appendCard(parsedObject);
+  if(parsedObject.completed === false){
+    appendCard(parsedObject);
+  }
 }};
 
 function pushToStorage(id, object){
