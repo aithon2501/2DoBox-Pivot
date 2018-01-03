@@ -1,16 +1,16 @@
 $('.title-input').focus();
 $('.save-button').on('click', newToDo);
 $('.toDo-list').on('blur', '.card', editTitle);
-$('.toDo-list').on('blur', '.card', edittask);
-$('.search-input').on('keyup', searchList);
-$('.title-input').on('keyup', disabledToggleTitle);
-$('.task-input').on('keyup', disabledToggleTask);
-$('.save-button').on('click', disabledToggleTitle);
+$('.toDo-list').on('blur', '.card', editTask);
+$('.filter-input').on('keyup', filterList);
+$('.title-input').on('keyup', disableButton);
+$('.task-input').on('keyup', disableButton);
+$('.save-button').on('click', disableButton);
 $('.toDo-list').on('click', '.delete-button', deleteCard);
 $('.toDo-list').on('click', '.up-vote', upVote);
 $('.toDo-list').on('click', '.down-vote', downVote);
 
-
+disableButton();
 retrieveCard();
 
 function newToDo(event) {
@@ -68,12 +68,12 @@ function editTitle(card) {
   var id = $(this).attr('id');
   var pulledObject = localStorage.getItem(id);
   var parsedObject = JSON.parse(pulledObject);
-  var userTitle = $(this).find('.card-title').text();
+  var userTitle = $(this).find('.card-title').text(); 
   parsedObject.title = userTitle;
   pushToStorage(id, parsedObject);
 };
 
-function edittask(card) {
+function editTask(card) {
   var id = $(this).attr('id');
   var pulledObject = localStorage.getItem(id);
   var parsedObject = JSON.parse(pulledObject);
@@ -116,7 +116,7 @@ function downVote() {
    pushToStorage(id, parsedObject);
  };
 
-function searchList() {
+function filterList() {
   var titles = $('h2');
   var bodies = $('.card-body');
   for (var i = 0; i < (titles.length || bodies.length); i++) {
@@ -126,24 +126,17 @@ function searchList() {
     var searchInputtask = eachtask.includes($('.search-input').val().trim().toLowerCase());
     if (searchInputTitle === false && searchInputtask === false) {
     $($('h2')[i]).parent().hide();
-  } else if (searchInputTitle === true || searchInputtask === true) {
+  } else if (filterInputTitle === true || filterInputtask === true) {
     $($('h2')[i]).parent().show();
-  }}};
+    };
+   }
+ };
 
-function disabledToggleTitle (){
+function disableButton (){
+  var $taskInput = $('.task-input');
   var $titleInput = $('.title-input');
   var $saveButton = $('.save-button');
-  if($titleInput.val()){
-    $saveButton.attr('disabled', false);
-  } else {
-    $saveButton.attr('disabled', true);
-  }
-}
-
-function disabledToggleTask (){
-  var $titleInput = $('.task-input');
-  var $saveButton = $('.save-button');
-  if($titleInput.val()){
+  if($titleInput.val() && $taskInput.val()){
     $saveButton.attr('disabled', false);
   } else {
     $saveButton.attr('disabled', true);
