@@ -9,7 +9,6 @@ $('.save-button').on('click', disableButton);
 $('.toDo-list').on('click', '.delete-button', deleteCard);
 $('.toDo-list').on('click', '.up-vote', upVote);
 $('.toDo-list').on('click', '.down-vote', downVote);
-$('.card-body').on('keyup', )
 
 disableButton();
 retrieveCard();
@@ -69,7 +68,7 @@ function editTitle(card) {
   var id = $(this).attr('id');
   var pulledObject = localStorage.getItem(id);
   var parsedObject = JSON.parse(pulledObject);
-  var userTitle = $(this).text();
+  var userTitle = $(this).find('.card-title').text(); 
   parsedObject.title = userTitle;
   pushToStorage(id, parsedObject);
 };
@@ -78,7 +77,7 @@ function editTask(card) {
   var id = $(this).attr('id');
   var pulledObject = localStorage.getItem(id);
   var parsedObject = JSON.parse(pulledObject);
-  var usertask = $(this).text();
+  var usertask = $(this).find('.card-body').text();
   parsedObject.task = usertask;
   pushToStorage(id, parsedObject);
 };
@@ -153,9 +152,3 @@ function disableButton (){
   }
 }
 
-function enterButtonSubmits () {
-  if (e.keycode === 13) {
-    $(this).attr('contenteditable', true);
-    $(this).blur();
-  }
-}
