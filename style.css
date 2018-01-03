@@ -84,7 +84,11 @@ span {
 }
 
 .taskComplete {
-  background-color: #6A6C6E;
+  background-color: #D3D3D3;
+  text-decoration: line-through;
+}
+
+.taskComplete h2 {
   text-decoration: line-through;
 }
 
