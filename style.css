@@ -91,6 +91,15 @@ textarea {
   width: 50%;
 }
 
+.taskComplete {
+  background-color: #D3D3D3;
+  text-decoration: line-through;
+}
+
+.taskComplete h2 {
+  text-decoration: line-through;
+}
+
 .card-title {
   color: #6D6E71;
   display: inline-block;
