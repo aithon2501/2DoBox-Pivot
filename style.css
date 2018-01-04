@@ -145,7 +145,7 @@ nav {
 }
 /* end styles for delete button on cards */
 
-<<<<<<< HEAD
+
 .task-complete {
   float:right;
   margin-top:6px;
@@ -155,9 +155,9 @@ nav {
   display: block;
 }
 
-=======
+
 /* styles for upvote and downvote buttons */
->>>>>>> master
+
 .up-vote {
   background-image: url('FEE-ideabox-icon-assets/upvote.svg');
   height: 20px;

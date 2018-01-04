@@ -143,12 +143,12 @@ function getComplete() {
   var id = $(this).parents('.card').attr('id');
   var pulledObject = localStorage.getItem(id);
   var parsedObject = JSON.parse(pulledObject);
-  if (parsedObject.completed === false) {  
+  if (parsedObject.completed === false) {
   completeTask(id, parsedObject, complete);
   } else {
     parsedObject.completed = false;
     complete.toggleClass('taskComplete');
-  } 
+  }
     pushToStorage(id, parsedObject);
 }
 
@@ -164,7 +164,7 @@ function showCompletedTasks() {
     $('.card').hide();
   }
 }
-  
+
 function completeTask (id, parsedObject, complete) {
   parsedObject.completed = true;
   complete.toggleClass('taskComplete');
