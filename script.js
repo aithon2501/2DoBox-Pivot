@@ -9,7 +9,8 @@ $('.save-button').on('click', disableButton);
 $('.toDo-list').on('click', '.delete-button', deleteCard);
 $('.toDo-list').on('click', '.up-vote', delegateUp);
 $('.toDo-list').on('click', '.down-vote', delegateDown);
-$('.toDo-list').on('click', '.task-complete-button', completeTask);
+$('.show-completed-tasks-button').on('click', showCompletedTasks)
+$('.toDo-list').on('click', '.task-complete-button', getComplete);
 
 disableButton();
 retrieveCard();
@@ -137,14 +138,35 @@ function disableButton (){
   }
 }
 
-function completeTask () {
+function getComplete() {
+  var complete = $(this).parents('.card')
   var id = $(this).parents('.card').attr('id');
   var pulledObject = localStorage.getItem(id);
   var parsedObject = JSON.parse(pulledObject);
+  if (parsedObject.completed === false) {  
+  completeTask(id, parsedObject, complete);
+  } else {
+    parsedObject.completed = false;
+    complete.toggleClass('taskComplete');
+  } 
+    pushToStorage(id, parsedObject);
+}
+
+function showCompletedTasks() {
+ //how to pull ALL id's from local storage to look at?
+  var id = $('.card').attr('id');
+  var pulledObject = localStorage.getItem(id);
+  var parsedObject = JSON.parse(pulledObject);
+
+  if (parsedObject.completed === true) {
+    appendCard(parsedObject);
+  } else {
+    $('.card').hide();
+  }
+}
+  
+function completeTask (id, parsedObject, complete) {
   parsedObject.completed = true;
-
-  var complete = $(this).parent().parent()
   complete.toggleClass('taskComplete');
-
   pushToStorage(id, parsedObject);
 }
