@@ -183,3 +183,26 @@ When viewing the TODO list:
 Each TODO should have an option to set a due date for the specific TODO.
 Once a TODO’s due date is reached, the TODO should show a visual indication that it is past due if it has not been completed.
 Note: TimeZones are hard - consider using a library like MomentJS
+
+# Eval Notes
+## Overall
+would like to see css and UI a little tighter, but clear we put a lot of thought and time into the JS
+More progress in general, think about big picture and not just tunnel vision on the JS; where we focused energy and time GOOD JOB!
+## UI
+  -no real need for overflow scroll for cards...let the window do it
+  -cards visable behind filter bar
+  -fix these squirrely things in the UI
+## HTML
+  -put a class on the span tag so it's more explicit
+## css
+  -margin:auto on universal selector: bandaids over whole body
+  -text align:center is hacky
+    -better to use flexbox or setting a % of a container with margin:saveButton
+  -never use inline, use inline-block
+  -up-vote: good place to refactor some CSS
+    -shared class for upvote/down, then a more specific class for differences
+  -no camelCase in CSS!
+  -watch for opening and closing curlies on media query, and indentation inside of it
+## JS
+
+## Git/github
