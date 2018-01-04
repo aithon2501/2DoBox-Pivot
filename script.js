@@ -7,8 +7,8 @@ $('.title-input').on('keyup', disableButton);
 $('.task-input').on('keyup', disableButton);
 $('.save-button').on('click', disableButton);
 $('.toDo-list').on('click', '.delete-button', deleteCard);
-$('.toDo-list').on('click', '.up-vote', upVote);
-$('.toDo-list').on('click', '.down-vote', downVote);
+$('.toDo-list').on('click', '.up-vote', delegateUp);
+$('.toDo-list').on('click', '.down-vote', delegateDown);
 $('.show-completed-tasks-button').on('click', showCompletedTasks)
 $('.toDo-list').on('click', '.task-complete-button', getComplete);
 
@@ -88,45 +88,23 @@ function editTask(card) {
   pushToStorage(id, parsedObject);
 };
 
-function upVote() {
- var id = $(this).parents('.card').attr('id');
- var pulledObject = localStorage.getItem(id);
- var parsedObject = JSON.parse(pulledObject);
- var initialImportance = $(this).siblings('.importance').text();
- if (initialImportance === 'importance: none') {
-   $(this).siblings('.importance').text('importance: low');
-   parsedObject.importance = 'importance: low';
-} else if ($(this).siblings('.importance').text() === 'importance: low'){
-   $(this).siblings('.importance').text('importance: normal')
-   parsedObject.importance = 'importance: normal';
- } else if ($(this).siblings('.importance').text() === 'importance: normal'){
-   $(this).siblings('.importance').text('importance: high')
-   parsedObject.importance = 'importance: high';
- } else if ($(this).siblings('.importance').text() === 'importance: high'){
-   $(this).siblings('.importance').text('importance: critical')
-   parsedObject.importance = 'importance: critical';
- }
-   pushToStorage(id, parsedObject);
- };
+function delegateUp(){
+  changeVote(this, 1)
+}
 
-function downVote() {
- var id = $(this).parents('.card').attr('id');
+function delegateDown(){
+  changeVote(this,-1)
+}
+
+function changeVote(targetButton, newIndex) {
+ var id = $(targetButton).parents('.card').attr('id');
  var pulledObject = localStorage.getItem(id);
  var parsedObject = JSON.parse(pulledObject);
- var initialImportance = $(this).siblings('.importance').text();
- if (initialImportance === 'importance: critical') {
-   $(this).siblings('.importance').text('importance: high');
-   parsedObject.importance = 'importance: high';
-} else if ($(this).siblings('.importance').text() === 'importance: high'){
-   $(this).siblings('.importance').text('importance: normal')
-   parsedObject.importance = 'importance: normal';
- } else if ($(this).siblings('.importance').text() === 'importance: normal'){
-    $(this).siblings('.importance').text('importance: low')
-    parsedObject.importance = 'importance: low';
-  } else if ($(this).siblings('.importance').text() === 'importance: low'){
-     $(this).siblings('.importance').text('importance: none')
-     parsedObject.importance = 'importance: none';
-   }
+ var initialImportance = $(targetButton).siblings('.importance');
+ var potentialImportance = ['importance: none','importance: low', 'importance: normal', 'importance: high', 'importance: critical'];
+ var initialIndex = potentialImportance.indexOf(initialImportance.text());
+ initialImportance.text(potentialImportance[initialIndex + newIndex]);
+ parsedObject.importance = initialImportance.text();
    pushToStorage(id, parsedObject);
  };
 
@@ -189,8 +167,6 @@ function showCompletedTasks() {
   
 function completeTask (id, parsedObject, complete) {
   parsedObject.completed = true;
-
   complete.toggleClass('taskComplete');
-  
   pushToStorage(id, parsedObject);
 }
